@@ -48,10 +48,10 @@ public class Ball {
     public void checkCollision() {
         if(game.getPanel().getPlayer(1).getBounds().intersects(getBounds())) {
             xAcc = -xAcc;
-            yAcc += game.getPanel().getPlayer(2).getYAcc();
+            yAcc += game.getPanel().getPlayer(1).getYAcc();
         }
         if(game.getPanel().getPlayer(2).getBounds().intersects(getBounds())) {
-            xAcc = - xAcc;
+            xAcc = -xAcc;
             yAcc += game.getPanel().getPlayer(2).getYAcc();
         }
     }
