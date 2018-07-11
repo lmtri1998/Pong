@@ -16,11 +16,18 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
         this.game  = game;
         this.mode = mode;
         ball = new Ball(game);
-        if(this.mode == 0)
+        if(this.mode == 0) {
             player1 = new Human(game, KeyEvent.VK_UP, KeyEvent.VK_DOWN, game.getWidth() - 140);
-        else
+            player2 = new Human(game, KeyEvent.VK_W, KeyEvent.VK_S, 100);
+        }
+        else if(this.mode == 1) {
             player1 = new Computer(game, 4, game.getWidth() - 140);
-        player2 = new Human(game, KeyEvent.VK_W, KeyEvent.VK_S, 100);
+            player2 = new Human(game, KeyEvent.VK_W, KeyEvent.VK_S, 100);
+        }
+        else {
+            player1 = new Computer(game, 4, game.getWidth() - 140);
+            player2 = new Computer(game, 4, 100);
+        }
         score1 = 0;
         score2 = 0;
         Timer timer = new Timer(5, this);
@@ -70,16 +77,22 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener{
     public void keyPressed(KeyEvent e) {
         if(this.mode == 0) {
             player1.keyPressed(e.getKeyCode());
+            player2.keyPressed(e.getKeyCode());
         }
-        player2.keyPressed(e.getKeyCode());
+        else if(this.mode == 1) {
+            player2.keyPressed(e.getKeyCode());
+        }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         if(this.mode == 0) {
             player1.keyRelease(e.getKeyCode());
+            player2.keyRelease(e.getKeyCode());
         }
-        player2.keyRelease(e.getKeyCode());
+        else if(this.mode == 1) {
+            player2.keyRelease(e.getKeyCode());
+        }
     }
 
     @Override

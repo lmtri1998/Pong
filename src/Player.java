@@ -12,6 +12,8 @@ public abstract class Player {
         this.y = game.getHeight()/2;
     }
 
+    public abstract int getX();
+
     public abstract int getYAcc();
 
     public abstract  void update();

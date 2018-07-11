@@ -39,6 +39,10 @@ public class Human extends Player{
         return yAcc;
     }
 
+    public int getX() {
+        return x;
+    }
+
     public Rectangle getBounds() {
         return new Rectangle(x, y, WIDTH, HEIGHT);
     }

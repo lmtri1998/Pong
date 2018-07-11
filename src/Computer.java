@@ -11,10 +11,13 @@ public class Computer extends Player{
 
     public void update() {
         if(y > 0 && y < game.getHeight() - HEIGHT - 29) {
-            if(this.y > game.getPanel().getBall().getY()) {
+            int slope= game.getPanel().getBall().getyAcc()/game.getPanel().getBall().getxAcc();
+            // Calculate the y position before hand to move the racket to there.
+            int futureY =(slope*(this.x - game.getPanel().getBall().getX())) + game.getPanel().getBall().getY();
+            if(this.y > futureY) {
                 y -= yAcc;
             }
-            else if(this.y < game.getPanel().getBall().getY()) {
+            else if(this.y < futureY) {
                 y += yAcc;
             }
         }
@@ -34,6 +37,10 @@ public class Computer extends Player{
 
     public int getYAcc() {
         return yAcc;
+    }
+
+    public int getX() {
+        return x;
     }
 
     public Rectangle getBounds() {

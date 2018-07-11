@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 public class Ball {
     private static final int WIDTH = 30, HEIGHT=30;
+    private final int MAX_Y_SPEED = 6;
     private Pong game;
     private int x,y, xAcc = 2, yAcc = 2;
 
@@ -13,6 +14,18 @@ public class Ball {
 
     public int getY() {
         return this.y;
+    }
+
+    public int getX() {
+        return this.x;
+    }
+
+    public int getxAcc() {
+        return xAcc;
+    }
+
+    public int getyAcc() {
+        return yAcc;
     }
 
     public void update() {
@@ -47,12 +60,18 @@ public class Ball {
 
     public void checkCollision() {
         if(game.getPanel().getPlayer(1).getBounds().intersects(getBounds())) {
-            xAcc = -xAcc;
-            yAcc += game.getPanel().getPlayer(1).getYAcc();
+            if(!(game.getPanel().getPlayer(1).getX() <= this.x))
+                xAcc = -xAcc;
+            int newYSpeed = yAcc + game.getPanel().getPlayer(1).getYAcc();
+            if(newYSpeed <= MAX_Y_SPEED)
+                yAcc = newYSpeed;
         }
         if(game.getPanel().getPlayer(2).getBounds().intersects(getBounds())) {
-            xAcc = -xAcc;
-            yAcc += game.getPanel().getPlayer(2).getYAcc();
+            if(!(game.getPanel().getPlayer(2).getX() >= this.x))
+                xAcc = -xAcc;
+            int newYSpeed = yAcc + game.getPanel().getPlayer(2).getYAcc();
+            if(newYSpeed <= MAX_Y_SPEED)
+                yAcc = newYSpeed;
         }
     }
 
