@@ -59,14 +59,18 @@ public class Ball {
     }
 
     public void checkCollision() {
-        if(game.getPanel().getPlayer(1).getBounds().intersects(getBounds())) {
+        if((game.getPanel().getPlayer(1).getBounds().intersects(getBounds()) && (y < 0 || y > game.getHeight() - HEIGHT - 29))
+                || (game.getPanel().getPlayer(2).getBounds().intersects(getBounds()) && (y < 0 || y > game.getHeight() - HEIGHT - 29))) {
+            yAcc = -yAcc;
+        }
+        else if(game.getPanel().getPlayer(1).getBounds().intersects(getBounds())) {
             if(!(game.getPanel().getPlayer(1).getX() <= this.x))
                 xAcc = -xAcc;
             int newYSpeed = yAcc + game.getPanel().getPlayer(1).getYAcc();
             if(newYSpeed <= MAX_Y_SPEED)
                 yAcc = newYSpeed;
         }
-        if(game.getPanel().getPlayer(2).getBounds().intersects(getBounds())) {
+        else if(game.getPanel().getPlayer(2).getBounds().intersects(getBounds())) {
             if(!(game.getPanel().getPlayer(2).getX() >= this.x))
                 xAcc = -xAcc;
             int newYSpeed = yAcc + game.getPanel().getPlayer(2).getYAcc();
